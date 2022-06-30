@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="row frontier-comment" style="margin-top:10px;">
+        <div class="col-sm-1 col-md-1  d-none d-sm-block">
+            <div class="text-center">
+                <span (click)="score(1)"  style="cursor:pointer;">
+                    <i class="bi bi-plus-lg"></i>
+                </span>
+            </div>
+            <div class="text-center">
+                {{comment.score}}
+            </div>
+            <div class="text-center">
+                <span (click)="score(-1)"  style="cursor:pointer;">
+                    <i class="bi bi-dash-lg"></i>
+                </span>
+            </div>
+        </div>
+        <div class="col-sm-11 col-md-11 col-xs-12">
+            <div class="row">
+                <div class="col-sm-9 col-md-9 col-12">
+                    <span> <img src="{{getAvatar(comment.userId)}}" style="height:40px;width:40px;"> </span>
+                    <span>
+                        <span>{{getUserName(comment.userId)}} </span>
+                        <span *ngIf="comment.userId==currentUserID">
+                            <span class="badge rounded-pill text-bg-primary" 
+                            style="background-color:darkslateblue;margin-right:5px;">You</span></span>
+                        <span>{{getAge()}}</span>    
+                    </span>
+                </div>
+    
+                <div class="col-sm-3 col-md-3 d-none d-sm-block text-end">
+                    <span *ngIf="comment.userId==currentUserID" (click)="toggleEdit()"  style="cursor:pointer;">
+                        <i class="bi bi-pencil-fill"></i> edit
+                    </span>
+                    <span *ngIf="comment.userId!=currentUserID" (click)="toggleReply()" style="cursor:pointer;">
+                        <i class="bi bi-reply-fill"></i> reply
+                    </span>
+    
+                </div>
+            </div>
+            <div class="row" style="padding-left:3px;">
+                <span> <span class="frontier-target" *ngIf="isReply()">{{getTarget()}}</span> {{comment.content}}</span>
+            </div>
+            <div class="container-fluid  d-block d-sm-none" style="padding-left:0px;padding-right:0px;">
+                <div class="row ">
+                    <div class="col-6">
+                        <span (click)="score(1)"  style="cursor:pointer;">
+                            <i class="bi bi-plus-lg"></i>
+                        </span>
+                        {{comment.score}}
+                        <span (click)="score(-1)"  style="cursor:pointer;">
+                            <i class="bi bi-dash-lg"></i>
+                        </span>
+                    </div>
+                    <div class="col-6 text-end justify-content-end ">
+                        <span *ngIf="comment.userId==currentUserID" (click)="toggleEdit()" style="cursor:pointer;">
+                            <i class="bi bi-pencil-fill"></i> edit
+                        </span>
+                        <span *ngIf="comment.userId!=currentUserID" (click)="toggleReply()" style="cursor:pointer;">
+                            <i class="bi bi-reply-fill"></i> reply
+                        </span>
+    
+                    </div>
+    
+                </div>    
+            </div>
+    
+        </div>
+    </div>
+
+</div>
+<div *ngIf="editMode"  >
+    <app-frontier-comment-edit [comment]="comment"></app-frontier-comment-edit>
+</div>
+<div *ngIf="replyMode">
+    <app-frontier-comment-edit [comment]="newComment"></app-frontier-comment-edit>
+</div>

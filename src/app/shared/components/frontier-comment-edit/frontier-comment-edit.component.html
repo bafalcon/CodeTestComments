@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="row frontier-comment" style="margin-top:10px;">
+
+        <div class="col-sm-2 col-md-2   d-none d-sm-block">
+            <span> <img src="{{getAvatar()}}" style="height:40px;width:40px;"> </span>
+        </div>
+        <div class="col-12 col-sm-8 col-md-8" style="padding-left:0px;padding-bottom:10px;">
+            <label for="commentContent" class="form-label" style="font-size:smaller">Enter Comment</label>
+            <textarea class="form-control" id="commentContent" placeholder="Enter Comment" rows="3"
+             [(ngModel)]="theComment.content"></textarea>
+
+        </div>
+        <div class=" col-sm-2 col-md-2   d-none d-sm-block" style="padding-left:0px;padding-top:30px;">
+
+            <div *ngIf="theComment.id" (click)="deleteComment()" style="cursor:pointer;margin-bottom:10px;color:red">
+                <i class="bi bi-trash-fill  " ></i>delete
+            </div>
+            <span *ngIf="theComment.id" >
+                <button type="button" class="btn btn-primary" (click)="saveComment()">Update</button>
+            </span>
+            <span *ngIf="!theComment.id" >
+                <button type="button" class="btn btn-primary" (click)="saveComment()">Send</button>
+            </span>
+        </div>
+
+        <div class="col-4 d-block d-sm-none">
+            <span> <img src="{{getAvatar()}}" style="height:40px;width:40px;"> </span>
+        </div>
+        <div class="col-8 d-block d-sm-none text-end" style="padding-left:0px;">
+            <span *ngIf="theComment.id" (click)="deleteComment()" style="cursor:pointer; color:red">
+                <i class="bi bi-trash-fill  " ></i>delete
+            </span>
+
+            <span *ngIf="theComment.id" >
+                <button type="button" class="btn btn-primary" (click)="saveComment()">Update</button>
+            </span>
+            <span *ngIf="!theComment.id" >
+                <button type="button" class="btn btn-primary" (click)="saveComment()">Send</button>
+            </span>
+        </div>
+
+    </div>
+
+     
+
+</div>
+
+<ng-template #confirmModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Delete Comment</h4>
+    </div>
+    <div class="modal-body">
+       Are you sure...
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close(false)">Cancel</button>
+      <button type="button" class="btn btn-danger" (click)="modal.close(true)">Delete</button>
+    </div>
+  </ng-template>
